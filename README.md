@@ -8,4 +8,4 @@ Requirements are that you have [MISE-EN-PLACE](https://mise.jdx.dev/) installed.
 
 1. `mise install` - Install tools
 2. `mise t r client:install && mise t r server:install` - Install dependencies
-3. `mise t r server:env` - Use python virtual env (execute this on every new terminal instance)
+3. `$(poetry --project=server env activate)` - Use python virtual env (execute this on every new terminal instance)
