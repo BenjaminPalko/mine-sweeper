@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Mine Sweeper",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

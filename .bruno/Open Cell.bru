@@ -1,0 +1,21 @@
+meta {
+  name: Open Cell
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/api/:game_id/cell/:cell_id/open
+  body: none
+  auth: inherit
+}
+
+params:path {
+  cell_id: 
+  game_id: 
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

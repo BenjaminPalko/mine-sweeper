@@ -1,6 +1,7 @@
 from typing import Any
-from django.shortcuts import render
+
 from django.http import HttpRequest, JsonResponse
+from django.shortcuts import render
 
 
 def BuildResponse(data: dict[str, Any], status_code: int):
@@ -13,20 +14,27 @@ def BuildResponse(data: dict[str, Any], status_code: int):
 def start(request: HttpRequest):
 
     if request.method != "POST":
-        return JsonResponse({"error": "Unsupported method %s" % request.method})
+        return BuildResponse({"error": "Unsupported method %s" % request.method}, 405)
 
     return BuildResponse({}, 200)
 
 
-def details(request, game_id):
+def details(request: HttpRequest, game_id: int):
     if request.method != "GET":
-        return JsonResponse({"error": "Unsupported method %s" % request.method})
+        return BuildResponse({"error": "Unsupported method %s" % request.method}, 405)
 
     return BuildResponse({}, 200)
 
 
-def play(request, game_id):
+def openCell(request: HttpRequest, game_id: int, cell_id: int):
     if request.method != "POST":
-        return JsonResponse({"error": "Unsupported method %s" % request.method})
+        return BuildResponse({"error": "Unsupported method %s" % request.method}, 405)
+
+    return BuildResponse({}, 200)
+
+
+def flagCell(request: HttpRequest, game_id: int, cell_id: int):
+    if request.method != "POST":
+        return BuildResponse({"error": "Unsupported method %s" % request.method}, 405)
 
     return BuildResponse({}, 200)
