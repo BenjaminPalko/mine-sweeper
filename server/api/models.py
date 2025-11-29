@@ -14,12 +14,15 @@ class Game(models.Model):
         choices=State,
         default=State.PLAYING,
     )
+    width = models.SmallIntegerField(blank=False, null=False)
+    height = models.SmallIntegerField(blank=False, null=False)
+    mines = models.SmallIntegerField(blank=False, null=False)
 
 
 class Cell(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, blank=False, null=False)
     coord_x = models.SmallIntegerField(blank=False, null=False)
-    coord_x = models.SmallIntegerField(blank=False, null=False)
+    coord_y = models.SmallIntegerField(blank=False, null=False)
     mined = models.BooleanField(blank=False, null=False)
     opened = models.BooleanField(blank=False, null=False)
     flagged = models.BooleanField(blank=False, null=False)
