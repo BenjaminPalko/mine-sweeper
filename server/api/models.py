@@ -27,3 +27,15 @@ class Cell(models.Model):
     opened = models.BooleanField(blank=False, null=False)
     flagged = models.BooleanField(blank=False, null=False)
     danger_neighbours = models.SmallIntegerField(blank=False, null=False)
+
+    @classmethod
+    def create(cls, game: Game, x: int, y: int):
+        return Cell.objects.create(
+            game=game,
+            coord_x=x,
+            coord_y=y,
+            mined=False,
+            opened=False,
+            flagged=False,
+            danger_neighbours=False,
+        )
