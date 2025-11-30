@@ -1,10 +1,8 @@
 export type Cell = {
 	id: string;
-	opened: boolean;
 	flagged: boolean;
-	danger: number | null;
 	mined: boolean | null;
-};
+} & ({ opened: false } | { opened: true; danger: number });
 
 type GameState = "PL" | "GO" | "WI";
 
