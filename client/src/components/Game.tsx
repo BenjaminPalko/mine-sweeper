@@ -1,55 +1,12 @@
-import { Bomb, FlagTriangleRight } from "lucide-react";
-import type { Cell, Game as GameType } from "../types";
 import { useEffect } from "react";
-import clsx from "clsx";
+import type { Cell, Game as GameType } from "../types";
+import CellButton from "./CellButton";
 
 type Props = {
   game: GameType;
   cellOpen: (cell: Cell) => void;
   cellFlag: (cell: Cell) => void;
 };
-
-function cellIcon(cell: Cell) {
-  if (cell.mined) {
-    return <Bomb />;
-  } else if (cell.opened) {
-    return cell.danger > 0 && <p>{cell.danger}</p>;
-  } else if (cell.flagged) {
-    return <FlagTriangleRight />;
-  } else {
-    return "";
-  }
-}
-
-function GameCell({
-  cell,
-  open,
-  flag,
-}: {
-  cell: Cell;
-  open: () => void;
-  flag: () => void;
-}) {
-  return (
-    <button
-      className={clsx("btn btn-square rounded-none", {
-        "btn-info": cell.flagged,
-        "btn-neutral": cell.opened && !cell.mined,
-        "btn-error": cell.mined,
-      })}
-      onClick={(e) => {
-        e.preventDefault();
-        open();
-      }}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        flag();
-      }}
-    >
-      {cellIcon(cell)}
-    </button>
-  );
-}
 
 const Game = function ({ game, cellOpen, cellFlag }: Props) {
   useEffect(() => {
@@ -64,7 +21,7 @@ const Game = function ({ game, cellOpen, cellFlag }: Props) {
         {game.cells.map((col) => (
           <div className="flex flex-col">
             {col.map((cell) => (
-              <GameCell
+              <CellButton
                 key={cell.id}
                 cell={cell}
                 open={() => cellOpen(cell)}
