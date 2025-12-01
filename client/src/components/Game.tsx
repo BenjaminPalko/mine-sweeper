@@ -17,7 +17,7 @@ const Game = function ({ game, cellOpen, cellFlag }: Props) {
   // when using dynamically defined classes it breaks and grid doesn't work rehehehe
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-accent rounded">
         {game.cells.map((col) => (
           <div className="flex flex-col">
             {col.map((cell) => (
