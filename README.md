@@ -1,4 +1,4 @@
-# Meme Sweeper
+# Mine Sweeper
 
 This is a fun implementation of the classic 'mine sweeper' game, built using Django and React.
 
