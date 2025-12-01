@@ -6,6 +6,11 @@ import { Smile } from "lucide-react";
 
 const defaultGame = { width: 9, height: 9, mines: 10 };
 
+function isFinished(state: GameState) {
+  const endStates: GameState[] = ["GO", "WI"];
+  return endStates.includes(state);
+}
+
 const GameWrapper = function () {
   const [params, setParams] = useSearchParams();
 
@@ -19,16 +24,12 @@ const GameWrapper = function () {
   const { open, flag } = useCell();
   const { start, stop, running, reset, minutes, seconds } = useTimer();
 
-  function windowFocusChange(e: FocusEvent) {
-    if (e.currentTarget == null) {
-      console.log("window unfocused");
-    }
-  }
-
+  // Stop timer when game is finished
   useEffect(() => {
-    window.addEventListener("focus", windowFocusChange);
-    return () => window.removeEventListener("focus", windowFocusChange);
-  }, []);
+    if (game && isFinished(game?.state)) {
+      stop();
+    }
+  }, [game, stop]);
 
   // if no game id was found on query string params, create game
   useEffect(() => {
