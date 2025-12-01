@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router";
 import { useCell, useGame, useTimer } from "../hooks";
 import Game from "./Game";
 import { Smile } from "lucide-react";
+import clsx from "clsx";
+import type { GameState } from "../types";
 
 const defaultGame = { width: 9, height: 9, mines: 10 };
 
@@ -58,6 +60,30 @@ const GameWrapper = function () {
   return (
     <div className="relative h-fit w-fit mx-auto mt-16">
       <p className="absolute top-1 right-2">Game Id: {game?.id}</p>
+      {(game.state == "GO" || game.state == "WI") && (
+        <div
+          className={clsx(
+            "toast toast-center toast-middle border-2 bg-base-200 rounded-box p-8",
+            {
+              "border-info": game.state == "WI",
+              "border-error": game.state == "GO",
+            },
+          )}
+        >
+          <div
+            className={clsx("alert", {
+              "alert-info": game.state == "WI",
+              "alert-error": game.state == "GO",
+            })}
+          >
+            {game.state == "WI" ? (
+              <span>Winner! Gagnant!</span>
+            ) : (
+              <span>Game Over.</span>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="bg-base-200 border-2 border-base-300 rounded-box p-8 flex flex-col gap-4">
         <h1 className="text-2xl text-center">
